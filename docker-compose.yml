@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    volumes:
+      - laravel_full_picnut:/var/www/html 
+    ports:
+      - "9101:80"
+    networks:
+      - rede_publica
+
+volumes:
+  laravel_full_picnut:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /stacks/laravel-picnut/app_data
+
+networks:
+  rede_publica:
+    external: true
